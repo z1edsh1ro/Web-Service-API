@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 6, 2023, 1:55:38 PM by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="hotel" name="th.ac.ku.kps.eng.cpe.se.model.Hotelservice" optimistic-lock="none" table="hotelservice">
+        <id name="sevId" type="java.lang.Integer">
+            <column name="sevID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string">
+            <column length="100" name="name" not-null="true"/>
+        </property>
+        <property name="price" type="double">
+            <column name="price" not-null="true" precision="22" scale="0"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="servicerecords" table="servicerecord">
+            <key>
+                <column name="service" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.se.model.Servicerecord"/>
+        </set>
+    </class>
+</hibernate-mapping>

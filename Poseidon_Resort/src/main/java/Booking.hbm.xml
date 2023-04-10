@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 6, 2023, 1:55:38 PM by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="hotel" name="th.ac.ku.kps.eng.cpe.se.model.Booking" optimistic-lock="none" table="booking">
+        <id name="bid" type="java.lang.Integer">
+            <column name="BID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="th.ac.ku.kps.eng.cpe.se.model.Guest" fetch="select" name="guest">
+            <column name="guest" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="th.ac.ku.kps.eng.cpe.se.model.Room" fetch="select" name="room">
+            <column name="room" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="th.ac.ku.kps.eng.cpe.se.model.Status" fetch="select" name="status">
+            <column name="status" not-null="true"/>
+        </many-to-one>
+        <property name="firstDate" type="date">
+            <column length="10" name="firstDate" not-null="true"/>
+        </property>
+        <property name="lastDate" type="date">
+            <column length="10" name="lastDate" not-null="true"/>
+        </property>
+        <property name="chkin" type="timestamp">
+            <column length="19" name="chkin"/>
+        </property>
+        <property name="chkout" type="timestamp">
+            <column length="19" name="chkout"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="supplyrecords" table="supplyrecord">
+            <key>
+                <column name="booking"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.se.model.Supplyrecord"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="servicerecords" table="servicerecord">
+            <key>
+                <column name="booking" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.se.model.Servicerecord"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 6, 2023, 1:55:38 PM by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="hotel" name="th.ac.ku.kps.eng.cpe.se.model.Guest" optimistic-lock="none" table="guest">
+        <id name="gid" type="java.lang.Integer">
+            <column name="GID"/>
+            <generator class="identity"/>
+        </id>
+        <property name="name" type="string">
+            <column length="100" name="name" not-null="true"/>
+        </property>
+        <property name="surname" type="string">
+            <column length="100" name="surname" not-null="true"/>
+        </property>
+        <property name="username" type="string">
+            <column length="50" name="username" not-null="true"/>
+        </property>
+        <property name="password" type="string">
+            <column length="50" name="password" not-null="true"/>
+        </property>
+        <property name="phone" type="string">
+            <column length="12" name="phone" not-null="true"/>
+        </property>
+        <set fetch="select" inverse="true" lazy="true" name="bookings" table="booking">
+            <key>
+                <column name="guest" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.se.model.Booking"/>
+        </set>
+        <set fetch="select" inverse="true" lazy="true" name="visits" table="visit">
+            <key>
+                <column name="guest" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.se.model.Visit"/>
+        </set>
+    </class>
+</hibernate-mapping>

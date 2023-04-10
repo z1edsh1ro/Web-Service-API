@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generated Apr 6, 2023, 1:55:38 PM by Hibernate Tools 5.6.3.Final --><!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class catalog="hotel" name="th.ac.ku.kps.eng.cpe.se.model.Room" optimistic-lock="none" table="room">
+        <id name="rid" type="java.lang.Integer">
+            <column name="RID"/>
+            <generator class="identity"/>
+        </id>
+        <many-to-one class="th.ac.ku.kps.eng.cpe.se.model.Floor" fetch="select" name="floor">
+            <column name="floor" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="th.ac.ku.kps.eng.cpe.se.model.Roomtype" fetch="select" name="roomtype">
+            <column name="type" not-null="true"/>
+        </many-to-one>
+        <many-to-one class="th.ac.ku.kps.eng.cpe.se.model.Status" fetch="select" name="status">
+            <column name="status" not-null="true"/>
+        </many-to-one>
+        <set fetch="select" inverse="true" lazy="true" name="bookings" table="booking">
+            <key>
+                <column name="room" not-null="true"/>
+            </key>
+            <one-to-many class="th.ac.ku.kps.eng.cpe.se.model.Booking"/>
+        </set>
+    </class>
+</hibernate-mapping>
